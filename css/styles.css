@@ -7,7 +7,19 @@ body {
 }
 
 p {
-    color: blue;
+    color: white;
+}
+
+p.projects{
+	color: white;
+}
+
+p.intro{
+	color: grey;
+}
+
+p.feedback{
+	color: grey;
 }
 #backimg {
     background-image: url(../img/background.jpg);
