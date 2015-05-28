@@ -1,0 +1,16 @@
+h1 {
+    
+}
+body {
+    background-image: url(../img/background.jpg);
+    background-size: contain;
+}
+
+p {
+    color: blue;
+}
+#backimg {
+    background-image: url(../img/background.jpg);
+    
+    
+}
