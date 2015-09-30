@@ -1,32 +1,59 @@
-<!DOCTYPE html>
 <html>
-<head>
-<title>
-Dankometer
-</title>
-<link rel="stylesheet" type="text/css" href="dank.css"
-</head>
+  <head>
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <style>
+    #messagesDiv {
+      text-align: center;
+    }
+    #messageInput {
+      text-align: center;
+    }
 
-<body>
+    #nameInput {
+      text-align: center;
+    }
 
-<div id="memes">
+    #body {
+      text-align: center;
+    }
 
-<h1>Dankometer!</h3>
+    body {
+    background-image: url("https://wallpaperscraft.com/image/highlights_circles_spots_light_background_38182_1920x1080.jpg");
+}
 
-<p>Put the image url to your meme below, and the dankometer will tell you if it's dank or not!</p>
-
-<form>
-
-Meme link:<br>
-<input type="text" name="dank meme">
-<br>
-
-</form>
-
-<h2>Click Pepe below to find the dankness of your meme!</h2>
-<a href="dank.html"><img src="http://vignette4.wikia.nocookie.net/roblox/images/5/57/Pepe.png/revision/latest?cb=20150909113619"></a> 
-
-</div>
-
-</body>
+  #img {
+    text-align: center;
+  }
+    </style>
+  </head>
+  <body>
+    <div id="img">
+      <img src="https://lh3.googleusercontent.com/1VVhlYK7DyjJPJ0t1_jkcNCN1H9e9B6Mm8CTBPIH9iWMtR_GGIj1dpYXwTEQIMTpp59T=w300" width="100" height="100"></img>
+    </div>
+    <div id="body">
+    <div id='messagesDiv'></div>
+    <input type='text' id='nameInput' placeholder='Name'>
+    <input type='text' id='messageInput' placeholder='Message'>
+    <script>
+      var myDataRef = new Firebase('https://vivid-torch-5584.firebaseio.com/');
+      $('#messageInput').keypress(function (e) {
+        if (e.keyCode == 13) {
+          var name = $('#nameInput').val();
+          var text = $('#messageInput').val();
+          myDataRef.push({name: name, text: text});
+          $('#messageInput').val('');
+        }
+      });
+      myDataRef.on('child_added', function(snapshot) {
+        var message = snapshot.val();
+displayChatMessage(message.name, message.text);
+      });
+      function displayChatMessage(name, text) {
+        $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
+        $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
+      };
+    </script>
+  </div>
+  </body>
 </html>
